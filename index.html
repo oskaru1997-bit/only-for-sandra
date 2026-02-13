@@ -3,67 +3,152 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Walentynki</title>
+  <title>Walentynki ✨</title>
   <meta name="description" content="Sandra, zostaniesz moją walentynką?" />
   <style>
-    :root { --pink:#ff4d7d; --bg1:#ffe5ef; --bg2:#ffd6e6; --card:#ffffffcc; }
-    * { box-sizing:border-box; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
-    body{
-      margin:0; min-height:100vh; display:grid; place-items:center;
-      background: radial-gradient(1200px 800px at 20% 20%, var(--bg1), var(--bg2));
-      padding:24px;
+    :root{
+      --bg1:#0b1026;
+      --bg2:#200b2b;
+      --card:#ffffff10;
+      --card2:#ffffff18;
+      --text:#f6f7ff;
+      --muted:#cfd3ffcc;
+      --pink:#ff4d7d;
+      --aqua:#35d3ff;
+      --gold:#ffd66e;
+      --ok:#35ff9a;
+      --shadow: 0 24px 70px rgba(0,0,0,.45);
     }
+    *{ box-sizing:border-box; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% 15%, rgba(255,77,125,.25), transparent 60%),
+        radial-gradient(900px 600px at 80% 25%, rgba(53,211,255,.18), transparent 60%),
+        radial-gradient(900px 900px at 35% 85%, rgba(255,214,110,.15), transparent 65%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+    }
+
+    /* Hintergrund-Sterne */
+    .stars{
+      position:fixed; inset:0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.65), transparent 55%),
+        radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,.55), transparent 55%),
+        radial-gradient(2px 2px at 55% 70%, rgba(255,255,255,.45), transparent 55%),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.55), transparent 55%),
+        radial-gradient(2px 2px at 85% 85%, rgba(255,255,255,.35), transparent 55%);
+      opacity:.35;
+      filter: blur(.1px);
+      pointer-events:none;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding:24px;
+      position:relative;
+      z-index:2;
+    }
+
     .card{
-      width:min(560px, 92vw);
-      background: var(--card);
-      border: 1px solid #ffffff80;
-      backdrop-filter: blur(8px);
-      border-radius: 18px;
-      padding: 28px 22px 22px;
-      text-align:center;
-      box-shadow: 0 14px 40px rgba(0,0,0,.12);
-      position: relative;
+      width:min(680px, 92vw);
+      border-radius: 26px;
+      background: linear-gradient(135deg, var(--card), var(--card2));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      padding: 26px 22px 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .glow{
+      position:absolute; inset:-80px;
+      background: radial-gradient(400px 220px at 20% 20%, rgba(255,77,125,.22), transparent 60%),
+                  radial-gradient(420px 260px at 80% 30%, rgba(53,211,255,.16), transparent 60%),
+                  radial-gradient(520px 300px at 45% 95%, rgba(255,214,110,.12), transparent 65%);
+      filter: blur(6px);
+      opacity:.8;
+      pointer-events:none;
+    }
+
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
     }
     .badge{
-      width:86px; height:86px; margin:0 auto 10px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+    }
+    .badge .blob{
+      width:38px; height:38px;
+      border-radius:14px;
       display:grid; place-items:center;
-      border-radius: 50%;
-      background: #ffd1df;
-      position: relative;
-      font-size:34px;
+      background: linear-gradient(135deg, rgba(255,77,125,.35), rgba(53,211,255,.18));
+      border:1px solid rgba(255,255,255,.16);
+      transform: rotate(6deg);
     }
-    .badge::after{
-      content:"❤";
-      position:absolute; right:-6px; top:-10px;
-      font-size:22px;
-      transform: rotate(12deg);
+    .badge small{ color:var(--muted); display:block; line-height:1.1; }
+    .badge strong{ display:block; font-weight:850; letter-spacing:.2px; }
+    .chip{
+      font-size:12px;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      white-space:nowrap;
     }
+
     h1{
-      margin: 10px 0 8px;
-      font-size: 26px;
-      line-height: 1.2;
-      color:#151515;
-      letter-spacing:-.2px;
+      margin: 14px 0 6px;
+      font-size: clamp(22px, 3.2vw, 34px);
+      letter-spacing:-.4px;
+      line-height:1.12;
     }
+    .name{ color: #fff; font-weight:900; }
     .sub{
       margin:0 0 14px;
-      font-size: 14px;
-      color:#333;
-      opacity:.85;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.4;
     }
-    .name{ font-weight:800; }
+
+    .stage{
+      margin-top: 10px;
+      border-radius: 22px;
+      padding: 18px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(10,12,22,.25);
+      position:relative;
+      overflow:hidden;
+    }
+
     .actions{
-      margin-top: 8px;
-      height: 150px;
+      height: 165px;
       position: relative;
+      margin-top: 8px;
     }
+
     button, a.btn{
       border:0;
       padding: 12px 18px;
       border-radius: 999px;
-      font-weight: 700;
+      font-weight: 850;
       cursor: pointer;
-      transition: transform .12s ease;
       user-select:none;
       -webkit-tap-highlight-color: transparent;
       text-decoration:none;
@@ -71,196 +156,419 @@
       align-items:center;
       justify-content:center;
       gap:8px;
+      transition: transform .12s ease, filter .2s ease;
+      letter-spacing:.2px;
     }
     button:active, a.btn:active{ transform: scale(.98); }
+    button:disabled{ opacity:.55; cursor:not-allowed; }
 
     #yesBtn{
-      background: var(--pink);
-      color:white;
-      box-shadow: 0 10px 24px rgba(255,77,125,.25);
+      background: linear-gradient(135deg, rgba(255,77,125,1), rgba(255,214,110,.95));
+      color:#1b0b14;
+      box-shadow: 0 18px 40px rgba(255,77,125,.18);
       position:absolute;
       left: 50%;
       transform: translateX(-115%);
-      top: 46px;
-      min-width: 120px;
+      top: 54px;
+      min-width: 140px;
     }
-
     #noBtn{
-      background: #e9e9ee;
-      color:#222;
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      border:1px solid rgba(255,255,255,.14);
       position:absolute;
       left: 50%;
       transform: translateX(15%);
-      top: 46px;
-      min-width: 120px;
+      top: 54px;
+      min-width: 140px;
     }
 
     .hint{
       position:absolute;
       left:0; right:0;
-      bottom: 0px;
+      bottom: 2px;
+      padding: 0 8px;
+      text-align:center;
       font-size: 12px;
-      color:#444;
-      opacity:.8;
-      padding:0 10px;
+      color: var(--muted);
     }
 
     .result{
-      margin-top: 14px;
+      margin-top: 12px;
+      min-height: 24px;
       font-size: 15px;
-      color:#222;
-      min-height: 22px;
-    }
-
-    .dateBox{
-      margin-top: 14px;
-      display:none;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-    .chip{
-      border:1px solid #0000001a;
-      background:#fff;
-      padding:10px 12px;
-      border-radius:14px;
-      min-width: min(420px, 92vw);
-      text-align:left;
-      box-shadow: 0 8px 18px rgba(0,0,0,.06);
-    }
-    .chip b{ display:block; margin-bottom:6px; }
-
-    .ctaRow{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top: 10px;
-    }
-    .btnDark{
-      background:#111;
       color:#fff;
     }
-    .btnLight{
-      background:#fff;
-      color:#111;
-      border:1px solid #0000001a;
+
+    .panel{
+      display:none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+    }
+    .panel h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing:.1px;
+    }
+    .q{
+      display:grid;
+      gap:10px;
+    }
+    .q .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btnDark{
+      background: rgba(255,255,255,.1);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .btnPrimary{
+      background: linear-gradient(135deg, rgba(53,211,255,1), rgba(255,77,125,1));
+      color:#0b1026;
+    }
+    .btnOk{
+      background: linear-gradient(135deg, rgba(53,255,154,1), rgba(53,211,255,1));
+      color:#071226;
+    }
+    .tiny{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
     }
 
-    .confetti{
-      position: fixed; inset: 0;
+    .comic{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top: 8px;
+      flex-wrap:wrap;
+    }
+    .sticker{
+      flex: 1 1 190px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 12px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .sticker .icon{
+      width:44px; height:44px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:22px;
+      transform: rotate(-6deg);
+    }
+    .sticker b{ display:block; }
+    .sticker span{ display:block; color:var(--muted); font-size:12px; line-height:1.25; }
+
+    /* Floating hearts */
+    .hearts{
+      position:fixed; inset:0;
       pointer-events:none;
+      z-index:1;
+      overflow:hidden;
+    }
+    .heart{
+      position:absolute;
+      bottom:-40px;
+      font-size: 18px;
+      opacity:.0;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+    @keyframes floatUp{
+      0% { transform: translateY(0) translateX(0) scale(.9) rotate(0deg); opacity:0; }
+      10%{ opacity:.7; }
+      100%{ transform: translateY(-120vh) translateX(var(--dx)) scale(1.35) rotate(18deg); opacity:0; }
     }
 
-    @media (max-width: 380px){
-      h1{ font-size: 23px; }
-      .actions{ height: 160px; }
+    /* Canvas effects */
+    canvas.fx{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:3;
+    }
+
+    @media (max-width: 420px){
+      .actions{ height: 185px; }
+      #yesBtn, #noBtn{ min-width: 132px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="badge" aria-hidden="true">🐻</div>
+  <div class="stars"></div>
+  <div class="hearts" id="hearts"></div>
 
-    <h1><span class="name" id="gfName">Sandra</span>, zostaniesz moją walentynką?</h1>
-    <p class="sub">Uwaga: „Nie” dzisiaj jest wyjątkowo płochliwe 😈</p>
+  <div class="wrap">
+    <div class="card">
+      <div class="glow"></div>
 
-    <div class="actions" id="arena" aria-label="Wybór">
-      <button id="yesBtn">Tak</button>
-      <button id="noBtn" aria-label="Nie">Nie</button>
-      <div class="hint" id="hint">Spróbuj kliknąć „Nie”… jeśli się odważysz 😉</div>
-    </div>
-
-    <div class="result" id="result"></div>
-
-    <div class="dateBox" id="dateBox">
-      <div class="chip">
-        <b>Kiedy randka? 💘</b>
-        <div id="dateText">Piątek czy sobota? A może Ty wybierasz — ja się dostosuję 😄</div>
+      <div class="top">
+        <div class="badge">
+          <div class="blob">💌</div>
+          <div>
+            <small>Tryb:</small>
+            <strong>Walentynki Deluxe</strong>
+          </div>
+        </div>
+        <div class="chip" id="chip">✨ tylko dla Sandry</div>
       </div>
 
-      <div class="ctaRow">
-        <button class="btnDark" id="copyBtn">Skopiuj wiadomość</button>
-        <a class="btn btnLight" id="waLink" href="#" target="_blank" rel="noopener">Wyślij na WhatsApp</a>
+      <h1><span class="name" id="gfName">Sandra</span>, zostaniesz moją walentynką?</h1>
+      <p class="sub" id="sub">
+        Uwaga: przycisk „Nie” jest dzisiaj szybki jak kot po kawie ☕🐈
+      </p>
+
+      <div class="stage">
+        <div class="actions" id="arena" aria-label="Wybór">
+          <button id="yesBtn">Tak 💖</button>
+          <button id="noBtn" aria-label="Nie">Nie 🙃</button>
+          <div class="hint" id="hint">Spróbuj kliknąć „Nie”… o ile dasz radę 😈</div>
+        </div>
+
+        <div class="result" id="result"></div>
+
+        <div class="comic" id="comic" style="display:none;">
+          <div class="sticker">
+            <div class="icon">🎆</div>
+            <div>
+              <b>Feuerwerk</b>
+              <span>bo „Tak” zasługuje na efekt WOW</span>
+            </div>
+          </div>
+          <div class="sticker">
+            <div class="icon">😂</div>
+            <div>
+              <b>Tryb śmieszny</b>
+              <span>„Nie” jest tu tylko dla dekoracji</span>
+            </div>
+          </div>
+          <div class="sticker">
+            <div class="icon">💞</div>
+            <div>
+              <b>Tryb romantyczny</b>
+              <span>bo ja… serio… mocno 💘</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" id="panel">
+          <h2 id="qTitle">Pytanie 1/3</h2>
+
+          <div class="q" id="qBox"></div>
+
+          <div class="tiny" id="tiny">
+            (Spokojnie. To tylko nasza walentynkowa „ankieta miłości” 😄)
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <canvas class="confetti" id="confetti"></canvas>
+  <canvas class="fx" id="fx"></canvas>
 
   <script>
+    // ====== USTAWIENIA (zmieniasz tylko tu) ======
     const NAME = "Sandra";
 
+    // WhatsApp "direct-to-you":
+    // format: kraj+numer bez plusa i bez spacji
+    // dla +43 676 7888866 -> "436767888866"
+    const YOUR_WA_NUMBER = "436767888866";
+
+    // ====== TEKSTY ======
     const NO_HINTS = [
-      "„Nie” ucieka szybciej, niż myślisz 😇",
-      "„Nie” dzisiaj nie współpracuje 😈",
-      "Oho… „Nie” zniknęło 🙃",
-      "„Nie” właśnie poszło na urlop 🏝️",
-      "Nie ma opcji. Spróbuj jeszcze raz 😄"
+      "„Nie” właśnie zrobiło unik ninja 🥷",
+      "„Nie” mówi: „spróbuj jeszcze raz” 😇",
+      "Oho… „Nie” uciekło. Znowu. 🙃",
+      "„Nie” poszło na urlop 🏝️",
+      "„Nie” ma dziś wolne. Serio. 😈",
+      "„Nie” jest tylko atrapą. 🤫"
     ];
 
-    const YES_TEXTS = [
-      "Taaak! 💖",
+    const YES_HEADLINES = [
+      "TAAAK! 💖",
       "Okej… to oficjalne 🥰",
-      "No to pięknie 💘"
+      "No to pięknie! 💘",
+      "Wygrałem! (a Ty też) 😄💞"
     ];
 
+    const LOVE_LINES = [
+      "Właśnie zrobiłaś mi dzień. I tydzień. I cały luty. 😅",
+      "Uwaga: teraz uruchamia się tryb turbo-romantyczny ✨",
+      "Nie ma odwrotu. Zostałaś moją walentynką. 😌💘"
+    ];
+
+    // ====== DOM ======
     const gfName = document.getElementById("gfName");
+    const chip   = document.getElementById("chip");
+    const sub    = document.getElementById("sub");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn  = document.getElementById("noBtn");
     const arena  = document.getElementById("arena");
     const hint   = document.getElementById("hint");
     const result = document.getElementById("result");
-
-    const dateBox = document.getElementById("dateBox");
-    const copyBtn = document.getElementById("copyBtn");
-    const waLink  = document.getElementById("waLink");
+    const panel  = document.getElementById("panel");
+    const qTitle = document.getElementById("qTitle");
+    const qBox   = document.getElementById("qBox");
+    const comic  = document.getElementById("comic");
+    const hearts = document.getElementById("hearts");
 
     gfName.textContent = NAME;
+    chip.textContent = `✨ tylko dla ${NAME}`;
 
-    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+    // ====== FUNKCJE POMOCNICZE ======
+    const rnd = (min,max)=> Math.random()*(max-min)+min;
+    const pick = (arr)=> arr[Math.floor(Math.random()*arr.length)];
+    function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
 
+    // ====== "NIE" UCIEKA ======
     function moveNoButton() {
       const a = arena.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
+      const padding = 10;
 
-      const padding = 8;
-      const maxX = Math.max(padding, a.width  - b.width  - padding);
+      const maxX = Math.max(padding, a.width - b.width - padding);
       const maxY = Math.max(padding, a.height - b.height - padding);
 
-      // Zufällig, aber sicher innerhalb der Arena
-      const x = clamp(padding + Math.random() * (maxX - padding), padding, maxX);
-      const y = clamp(padding + Math.random() * (maxY - padding), padding, maxY);
+      const x = clamp(padding + Math.random()*(maxX - padding), padding, maxX);
+      const y = clamp(padding + Math.random()*(maxY - padding), padding, maxY);
 
       noBtn.style.left = x + "px";
       noBtn.style.top  = y + "px";
       noBtn.style.transform = "none";
+      hint.textContent = pick(NO_HINTS);
 
-      hint.textContent = NO_HINTS[Math.floor(Math.random() * NO_HINTS.length)];
+      // mały „puf” efekt
+      burstAt(x + b.width/2, y + b.height/2, 12, true);
     }
 
-    // Desktop + Mobile
     noBtn.addEventListener("mouseenter", moveNoButton);
-    noBtn.addEventListener("click", (e) => { e.preventDefault(); moveNoButton(); });
-    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoButton(); }, { passive:false });
+    noBtn.addEventListener("click", (e)=>{ e.preventDefault(); moveNoButton(); });
+    noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); moveNoButton(); }, { passive:false });
 
-    setTimeout(moveNoButton, 250);
+    setTimeout(moveNoButton, 260);
 
-    yesBtn.addEventListener("click", () => {
-      const headline = YES_TEXTS[Math.floor(Math.random() * YES_TEXTS.length)];
-      result.textContent = `${headline} To teraz… kiedy randka? 😄`;
+    // ====== HEARTS BACKGROUND ======
+    let heartTimer = null;
+    function startHearts(){
+      if(heartTimer) return;
+      heartTimer = setInterval(()=>{
+        const el = document.createElement("div");
+        el.className = "heart";
+        el.textContent = Math.random() < .7 ? "💗" : (Math.random()<.5 ? "💖" : "💘");
+        el.style.left = rnd(0, 100) + "vw";
+        el.style.setProperty("--dx", rnd(-20,20) + "vw");
+        el.style.animationDuration = rnd(4.5, 7.5) + "s";
+        el.style.opacity = "0";
+        hearts.appendChild(el);
+        setTimeout(()=> el.remove(), 8000);
+      }, 320);
+    }
+    function stopHearts(){
+      clearInterval(heartTimer);
+      heartTimer = null;
+    }
 
-      fireConfetti();
-      yesBtn.disabled = true;
-      noBtn.disabled = true;
-      hint.textContent = "💞";
+    // ====== FRAGEN-FLOW (nach "TAK") ======
+    const answers = { like:null, nextDate:null, love:null };
 
-      dateBox.style.display = "grid";
+    const steps = [
+      {
+        title: "Pytanie 1/3",
+        render: () => `
+          <div>Podoba Ci się ta strona? 😄</div>
+          <div class="row">
+            <button class="btnOk" data-a="like" data-v="Tak, jest urocza 💖">Tak, jest urocza 💖</button>
+            <button class="btnDark" data-a="like" data-v="Tak, ale chcę jeszcze więcej efektów 😂">Tak, ale chcę więcej efektów 😂</button>
+          </div>
+        `
+      },
+      {
+        title: "Pytanie 2/3",
+        render: () => `
+          <div>Kiedy nasze następne spotkanie/randka? 💘</div>
+          <div class="row">
+            <button class="btnPrimary" data-a="nextDate" data-v="W piątek wieczorem ✨">W piątek wieczorem ✨</button>
+            <button class="btnPrimary" data-a="nextDate" data-v="W sobotę (i robimy coś fajnego) 😄">W sobotę 😄</button>
+            <button class="btnDark" data-a="nextDate" data-v="Ty wybierasz – ja jestem na tak 🥰">Ty wybierasz 🥰</button>
+          </div>
+        `
+      },
+      {
+        title: "Pytanie 3/3",
+        render: () => `
+          <div>Ostatnie i najważniejsze… Kochasz mnie? 😳❤️</div>
+          <div class="row">
+            <button class="btnOk" data-a="love" data-v="Tak ❤️">Tak ❤️</button>
+            <button class="btnDark" data-a="love" data-v="Bardzo! 💘">Bardzo! 💘</button>
+            <button class="btnDark" data-a="love" data-v="Jeszcze jak! 😄💞">Jeszcze jak! 😄💞</button>
+          </div>
+          <div class="tiny">Po kliknięciu przygotuję wiadomość na WhatsApp i wyślesz ją do mnie jednym tapnięciem.</div>
+        `
+      }
+    ];
 
-      const msg = `${NAME} ❤️ Powiedziałaś TAK! 😄 To kiedy randka?`;
-      waLink.href = "https://wa.me/?text=" + encodeURIComponent(msg);
+    let stepIndex = 0;
 
+    function showStep(i){
+      stepIndex = i;
+      panel.style.display = "block";
+      qTitle.textContent = steps[i].title;
+      qBox.innerHTML = steps[i].render();
+
+      qBox.querySelectorAll("button[data-a]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const a = btn.getAttribute("data-a");
+          const v = btn.getAttribute("data-v");
+          answers[a] = v;
+
+          // małe efekty przy każdej odpowiedzi
+          megaPop();
+          if(i < steps.length - 1) showStep(i+1);
+          else finishFlow();
+        });
+      });
+    }
+
+    function finishFlow(){
+      qTitle.textContent = "Gotowe ✅";
+      const msg =
+`${NAME} 💖
+1) Podobała mi się strona: ${answers.like}
+2) Następna randka: ${answers.nextDate}
+3) Kocham Cię: ${answers.love}
+
+PS. Tak, zostaję Twoją walentynką 😄💘`;
+
+      qBox.innerHTML = `
+        <div style="line-height:1.45; color:var(--muted);">
+          Perfekcyjnie. Teraz kliknij poniżej i wyślij mi to na WhatsApp 😄
+        </div>
+        <div class="row" style="margin-top:12px;">
+          <button class="btnOk" id="copyBtn">Skopiuj wiadomość</button>
+          <a class="btn btnPrimary" id="waBtn" href="#" target="_blank" rel="noopener">Wyślij na WhatsApp</a>
+        </div>
+        <div class="tiny">Jeśli WhatsApp się nie otworzy, skopiuj wiadomość i wklej ręcznie.</div>
+      `;
+
+      // WhatsApp direct:
+      const waUrl = `https://wa.me/${YOUR_WA_NUMBER}?text=` + encodeURIComponent(msg);
+      const waBtn = document.getElementById("waBtn");
+      waBtn.href = waUrl;
+
+      const copyBtn = document.getElementById("copyBtn");
       copyBtn.onclick = async () => {
         try{
           await navigator.clipboard.writeText(msg);
@@ -271,48 +579,163 @@
           setTimeout(()=>copyBtn.textContent="Skopiuj wiadomość", 1400);
         }
       };
+
+      // Final celebration
+      finaleShow();
+    }
+
+    // ====== CLICK "TAK" ======
+    yesBtn.addEventListener("click", ()=>{
+      yesBtn.disabled = true;
+      noBtn.disabled = true;
+
+      const headline = pick(YES_HEADLINES);
+      const line = pick(LOVE_LINES);
+
+      result.textContent = `${headline} ${line}`;
+      sub.textContent = "Dobra. Teraz będzie romantycznie i trochę śmiesznie 😄💞";
+
+      comic.style.display = "flex";
+      startHearts();
+
+      // duży start-show: konfetti + mini-fireworks
+      finaleBurst();
+      showStep(0);
     });
 
-    // Konfetti
-    const canvas = document.getElementById("confetti");
+    // ====== CANVAS: konfetti + fireworks ======
+    const canvas = document.getElementById("fx");
     const ctx = canvas.getContext("2d");
-    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
     addEventListener("resize", resize); resize();
 
     let particles = [];
-    function fireConfetti(){
-      const count = 170;
-      const cx = innerWidth/2, cy = innerHeight/2;
-      particles = [];
-      for(let i=0;i<count;i++){
-        particles.push({
-          x: cx, y: cy,
-          vx: (Math.random()-0.5)*10,
-          vy: (Math.random()-0.8)*12,
-          g: 0.22 + Math.random()*0.08,
-          r: 3 + Math.random()*4,
-          a: 1
-        });
+    let running = false;
+
+    function addParticles(list){
+      particles.push(...list);
+      if(!running){
+        running = true;
+        requestAnimationFrame(tick);
       }
-      requestAnimationFrame(tick);
-      setTimeout(()=>particles = [], 1800);
     }
+
+    // type: "conf" | "spark"
     function tick(){
       ctx.clearRect(0,0,canvas.width,canvas.height);
+      const gravity = 0.06;
+
+      particles = particles.filter(p => p.life > 0 && p.a > 0.02);
+
       for(const p of particles){
-        p.vy += p.g;
+        p.vy += (p.type === "conf" ? gravity : gravity*0.4);
         p.x += p.vx;
         p.y += p.vy;
-        p.a *= 0.985;
+        p.vx *= 0.995;
+        p.vy *= 0.995;
+        p.life -= 1;
+        p.a *= 0.988;
 
         ctx.globalAlpha = p.a;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fill();
+
+        if(p.type === "conf"){
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          p.rot += p.vr;
+          ctx.fillStyle = p.c;
+          ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s*0.65);
+          ctx.restore();
+        }else{
+          ctx.beginPath();
+          ctx.fillStyle = p.c;
+          ctx.arc(p.x, p.y, p.s, 0, Math.PI*2);
+          ctx.fill();
+        }
       }
+
       ctx.globalAlpha = 1;
-      if(particles.length) requestAnimationFrame(tick);
+
+      if(particles.length){
+        requestAnimationFrame(tick);
+      }else{
+        running = false;
+      }
     }
+
+    function confettiRain(intensity=220){
+      const cx = innerWidth/2, cy = innerHeight*0.25;
+      const colors = ["#ff4d7d","#35d3ff","#ffd66e","#ffffff","#35ff9a","#caa7ff"];
+      const list = [];
+      for(let i=0;i<intensity;i++){
+        list.push({
+          type:"conf",
+          x: cx + rnd(-120,120),
+          y: cy + rnd(-60,60),
+          vx: rnd(-2.6,2.6),
+          vy: rnd(-3.2,1.5),
+          s: rnd(6,11),
+          rot: rnd(0, Math.PI*2),
+          vr: rnd(-0.12,0.12),
+          c: colors[Math.floor(rnd(0, colors.length))],
+          a: 1,
+          life: Math.floor(rnd(120, 220))
+        });
+      }
+      addParticles(list);
+    }
+
+    function burstAt(x,y,count=38, soft=false){
+      const colors = soft ? ["#ffffff","#ffd66e","#ff4d7d"] : ["#ff4d7d","#35d3ff","#ffd66e","#35ff9a","#caa7ff","#ffffff"];
+      const list = [];
+      for(let i=0;i<count;i++){
+        const ang = rnd(0, Math.PI*2);
+        const sp  = soft ? rnd(0.7,2.6) : rnd(1.4,5.2);
+        list.push({
+          type:"spark",
+          x, y,
+          vx: Math.cos(ang)*sp,
+          vy: Math.sin(ang)*sp - (soft ? 0.2 : 0.8),
+          s: rnd(1.5, 3.4),
+          c: colors[Math.floor(rnd(0, colors.length))],
+          a: 1,
+          life: Math.floor(rnd(60, 120))
+        });
+      }
+      addParticles(list);
+    }
+
+    function finaleBurst(){
+      confettiRain(260);
+      // kilka fajerwerków w losowych miejscach
+      for(let i=0;i<6;i++){
+        setTimeout(()=>{
+          burstAt(rnd(innerWidth*0.2, innerWidth*0.8), rnd(innerHeight*0.18, innerHeight*0.6), 60, false);
+        }, i*140);
+      }
+    }
+
+    function megaPop(){
+      confettiRain(120);
+      burstAt(rnd(innerWidth*0.3, innerWidth*0.7), rnd(innerHeight*0.25, innerHeight*0.6), 52, true);
+    }
+
+    function finaleShow(){
+      // jeszcze więcej, ale krótko
+      for(let i=0;i<10;i++){
+        setTimeout(()=>{
+          burstAt(rnd(innerWidth*0.18, innerWidth*0.82), rnd(innerHeight*0.12, innerHeight*0.65), 70, false);
+        }, i*120);
+      }
+      confettiRain(320);
+    }
+
+    // przy kliknięciu w tło też mały efekt (fajne na mobilu)
+    document.addEventListener("click", (e)=>{
+      const target = e.target;
+      if(target && (target.tagName === "BUTTON" || target.tagName === "A")) return;
+      burstAt(e.clientX, e.clientY, 24, true);
+    });
   </script>
 </body>
 </html>
