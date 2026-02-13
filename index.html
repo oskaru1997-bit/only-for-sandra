@@ -3,21 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Walentynki ✨</title>
+  <meta name="color-scheme" content="dark" />
+  <title>Dla mojej Sandrusi 🧸💖</title>
   <meta name="description" content="Sandra, zostaniesz moją walentynką?" />
+
   <style>
     :root{
-      --bg1:#0b1026;
-      --bg2:#200b2b;
+      --bg1:#070A18;
+      --bg2:#1a0820;
       --card:#ffffff10;
       --card2:#ffffff18;
       --text:#f6f7ff;
-      --muted:#cfd3ffcc;
+      --muted:#d7dbffcc;
       --pink:#ff4d7d;
       --aqua:#35d3ff;
       --gold:#ffd66e;
       --ok:#35ff9a;
-      --shadow: 0 24px 70px rgba(0,0,0,.45);
+      --shadow: 0 26px 75px rgba(0,0,0,.50);
     }
     *{ box-sizing:border-box; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
     html,body{ height:100%; }
@@ -25,25 +27,45 @@
       margin:0;
       color:var(--text);
       background:
-        radial-gradient(1200px 800px at 15% 15%, rgba(255,77,125,.25), transparent 60%),
-        radial-gradient(900px 600px at 80% 25%, rgba(53,211,255,.18), transparent 60%),
-        radial-gradient(900px 900px at 35% 85%, rgba(255,214,110,.15), transparent 65%),
+        radial-gradient(1200px 800px at 14% 16%, rgba(255,77,125,.22), transparent 62%),
+        radial-gradient(900px 620px at 82% 26%, rgba(53,211,255,.16), transparent 62%),
+        radial-gradient(980px 980px at 35% 86%, rgba(255,214,110,.12), transparent 68%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
       overflow:hidden;
     }
 
-    /* Hintergrund-Sterne */
     .stars{
       position:fixed; inset:0;
       background-image:
-        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.65), transparent 55%),
-        radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,.55), transparent 55%),
-        radial-gradient(2px 2px at 55% 70%, rgba(255,255,255,.45), transparent 55%),
-        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.55), transparent 55%),
-        radial-gradient(2px 2px at 85% 85%, rgba(255,255,255,.35), transparent 55%);
-      opacity:.35;
-      filter: blur(.1px);
+        radial-gradient(2px 2px at 12% 22%, rgba(255,255,255,.65), transparent 60%),
+        radial-gradient(1px 1px at 20% 78%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(2px 2px at 44% 34%, rgba(255,255,255,.45), transparent 60%),
+        radial-gradient(1px 1px at 58% 66%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(2px 2px at 76% 18%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(1px 1px at 86% 82%, rgba(255,255,255,.35), transparent 60%);
+      opacity:.34;
       pointer-events:none;
+      filter: blur(.1px);
+    }
+
+    .hearts{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:1;
+      overflow:hidden;
+    }
+    .heart{
+      position:absolute;
+      bottom:-44px;
+      font-size: 18px;
+      opacity:0;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+    @keyframes floatUp{
+      0% { transform: translateY(0) translateX(0) scale(.9) rotate(0deg); opacity:0; }
+      12%{ opacity:.9; }
+      100%{ transform: translateY(-125vh) translateX(var(--dx)) scale(1.55) rotate(18deg); opacity:0; }
     }
 
     .wrap{
@@ -56,53 +78,68 @@
     }
 
     .card{
-      width:min(680px, 92vw);
-      border-radius: 26px;
+      width:min(780px, 92vw);
+      border-radius: 30px;
       background: linear-gradient(135deg, var(--card), var(--card2));
       border:1px solid rgba(255,255,255,.14);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      padding: 26px 22px 18px;
+      padding: 22px 22px 18px;
       position:relative;
       overflow:hidden;
     }
+
     .glow{
-      position:absolute; inset:-80px;
-      background: radial-gradient(400px 220px at 20% 20%, rgba(255,77,125,.22), transparent 60%),
-                  radial-gradient(420px 260px at 80% 30%, rgba(53,211,255,.16), transparent 60%),
-                  radial-gradient(520px 300px at 45% 95%, rgba(255,214,110,.12), transparent 65%);
-      filter: blur(6px);
-      opacity:.8;
+      position:absolute; inset:-90px;
+      background:
+        radial-gradient(460px 260px at 18% 18%, rgba(255,77,125,.24), transparent 62%),
+        radial-gradient(460px 300px at 82% 28%, rgba(53,211,255,.15), transparent 62%),
+        radial-gradient(600px 340px at 45% 96%, rgba(255,214,110,.12), transparent 68%);
+      filter: blur(8px);
+      opacity:.9;
       pointer-events:none;
     }
 
-    .top{
+    /* NEW HEADER (replaces "Tryb: Walentynki Deluxe") */
+    .header{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      margin-bottom:10px;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
     }
-    .badge{
-      display:inline-flex;
+    .sig{
+      display:flex;
       align-items:center;
       gap:10px;
       padding:10px 12px;
-      border-radius:999px;
+      border-radius: 999px;
       border:1px solid rgba(255,255,255,.16);
       background: rgba(255,255,255,.06);
       box-shadow: 0 10px 30px rgba(0,0,0,.18);
     }
-    .badge .blob{
-      width:38px; height:38px;
-      border-radius:14px;
+    .sig .seal{
+      width:42px; height:42px;
+      border-radius: 16px;
       display:grid; place-items:center;
-      background: linear-gradient(135deg, rgba(255,77,125,.35), rgba(53,211,255,.18));
       border:1px solid rgba(255,255,255,.16);
+      background: linear-gradient(135deg, rgba(255,77,125,.35), rgba(53,211,255,.18));
       transform: rotate(6deg);
+      font-size: 20px;
     }
-    .badge small{ color:var(--muted); display:block; line-height:1.1; }
-    .badge strong{ display:block; font-weight:850; letter-spacing:.2px; }
+    .sig .text small{
+      display:block;
+      color:var(--muted);
+      line-height:1.1;
+      font-size:12px;
+    }
+    .sig .text strong{
+      display:block;
+      font-weight: 980;
+      letter-spacing: .2px;
+      font-size: 14px;
+    }
     .chip{
       font-size:12px;
       color:var(--muted);
@@ -112,42 +149,79 @@
       border:1px solid rgba(255,255,255,.12);
       white-space:nowrap;
     }
+    .chip b{ color:#fff; font-weight:950; }
 
     h1{
-      margin: 14px 0 6px;
-      font-size: clamp(22px, 3.2vw, 34px);
-      letter-spacing:-.4px;
+      margin: 10px 0 6px;
+      font-size: clamp(22px, 3.2vw, 38px);
+      letter-spacing:-.55px;
       line-height:1.12;
     }
-    .name{ color: #fff; font-weight:900; }
+    .name{ font-weight: 1000; }
     .sub{
       margin:0 0 14px;
       color:var(--muted);
       font-size:14px;
-      line-height:1.4;
+      line-height:1.45;
     }
 
-    .stage{
+    /* Teddy block */
+    .teddyWrap{
       margin-top: 10px;
-      border-radius: 22px;
+      border-radius: 24px;
+      padding: 14px 12px 10px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(8,10,18,.24);
+      overflow:hidden;
+      position:relative;
+    }
+    .teddyTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .teddyTitle .line{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .teddySvg{
+      width:100%;
+      max-height:220px;
+      display:block;
+    }
+    .labels{
+      display:flex;
+      justify-content:space-between;
+      margin-top:8px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .labels b{ color:#fff; font-weight:950; }
+
+    .stage{
+      margin-top: 12px;
+      border-radius: 24px;
       padding: 18px 14px;
       border: 1px solid rgba(255,255,255,.12);
-      background: rgba(10,12,22,.25);
+      background: rgba(8,10,18,.28);
       position:relative;
       overflow:hidden;
     }
 
     .actions{
-      height: 165px;
+      height: 190px;
       position: relative;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     button, a.btn{
       border:0;
       padding: 12px 18px;
       border-radius: 999px;
-      font-weight: 850;
+      font-weight: 980;
       cursor: pointer;
       user-select:none;
       -webkit-tap-highlight-color: transparent;
@@ -158,6 +232,8 @@
       gap:8px;
       transition: transform .12s ease, filter .2s ease;
       letter-spacing:.2px;
+      line-height:1;
+      white-space:nowrap;
     }
     button:active, a.btn:active{ transform: scale(.98); }
     button:disabled{ opacity:.55; cursor:not-allowed; }
@@ -169,8 +245,8 @@
       position:absolute;
       left: 50%;
       transform: translateX(-115%);
-      top: 54px;
-      min-width: 140px;
+      top: 66px;
+      min-width: 158px;
     }
     #noBtn{
       background: rgba(255,255,255,.14);
@@ -179,8 +255,8 @@
       position:absolute;
       left: 50%;
       transform: translateX(15%);
-      top: 54px;
-      min-width: 140px;
+      top: 66px;
+      min-width: 158px;
     }
 
     .hint{
@@ -195,62 +271,21 @@
 
     .result{
       margin-top: 12px;
-      min-height: 24px;
+      min-height: 26px;
       font-size: 15px;
       color:#fff;
     }
 
-    .panel{
-      display:none;
-      margin-top: 14px;
-      padding: 14px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-    }
-    .panel h2{
-      margin: 0 0 10px;
-      font-size: 16px;
-      letter-spacing:.1px;
-    }
-    .q{
-      display:grid;
-      gap:10px;
-    }
-    .q .row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-    .btnDark{
-      background: rgba(255,255,255,.1);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.14);
-    }
-    .btnPrimary{
-      background: linear-gradient(135deg, rgba(53,211,255,1), rgba(255,77,125,1));
-      color:#0b1026;
-    }
-    .btnOk{
-      background: linear-gradient(135deg, rgba(53,255,154,1), rgba(53,211,255,1));
-      color:#071226;
-    }
-    .tiny{
-      margin-top:10px;
-      font-size:12px;
-      color:var(--muted);
-    }
-
     .comic{
-      display:flex;
-      align-items:center;
+      display:none;
+      align-items:stretch;
       justify-content:space-between;
       gap:10px;
-      margin-top: 8px;
+      margin-top: 12px;
       flex-wrap:wrap;
     }
     .sticker{
-      flex: 1 1 190px;
+      flex: 1 1 220px;
       border-radius: 18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
@@ -271,28 +306,50 @@
     .sticker b{ display:block; }
     .sticker span{ display:block; color:var(--muted); font-size:12px; line-height:1.25; }
 
-    /* Floating hearts */
-    .hearts{
-      position:fixed; inset:0;
-      pointer-events:none;
-      z-index:1;
-      overflow:hidden;
+    .panel{
+      display:none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
     }
-    .heart{
-      position:absolute;
-      bottom:-40px;
-      font-size: 18px;
-      opacity:.0;
-      animation: floatUp linear forwards;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    .panel h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing:.1px;
     }
-    @keyframes floatUp{
-      0% { transform: translateY(0) translateX(0) scale(.9) rotate(0deg); opacity:0; }
-      10%{ opacity:.7; }
-      100%{ transform: translateY(-120vh) translateX(var(--dx)) scale(1.35) rotate(18deg); opacity:0; }
+    .q{
+      display:grid;
+      gap:10px;
+      color:var(--text);
+    }
+    .q .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btnDark{
+      background: rgba(255,255,255,.10);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .btnPrimary{
+      background: linear-gradient(135deg, rgba(53,211,255,1), rgba(255,77,125,1));
+      color:#0b1026;
+    }
+    .btnOk{
+      background: linear-gradient(135deg, rgba(53,255,154,1), rgba(53,211,255,1));
+      color:#071226;
+    }
+    .tiny{
+      margin-top:10px;
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.35;
     }
 
-    /* Canvas effects */
     canvas.fx{
       position:fixed; inset:0;
       pointer-events:none;
@@ -300,8 +357,8 @@
     }
 
     @media (max-width: 420px){
-      .actions{ height: 185px; }
-      #yesBtn, #noBtn{ min-width: 132px; }
+      .actions{ height: 215px; }
+      #yesBtn, #noBtn{ min-width: 152px; }
     }
   </style>
 </head>
@@ -314,62 +371,180 @@
     <div class="card">
       <div class="glow"></div>
 
-      <div class="top">
-        <div class="badge">
-          <div class="blob">💌</div>
-          <div>
-            <small>Tryb:</small>
-            <strong>Walentynki Deluxe</strong>
+      <!-- NEW TOP BAR -->
+      <div class="header">
+        <div class="sig">
+          <div class="seal">🧸</div>
+          <div class="text">
+            <small>specjalnie przygotowane</small>
+            <strong>dla mojej Sandrusi 💖</strong>
           </div>
         </div>
-        <div class="chip" id="chip">✨ tylko dla Sandry</div>
+        <div class="chip">✨ unikat • <b>tylko dla Sandry</b></div>
       </div>
 
-      <h1><span class="name" id="gfName">Sandra</span>, zostaniesz moją walentynką?</h1>
+      <h1><span class="name" id="gfName">Sandra</span>, zostaniesz moją walentynką? 💘</h1>
       <p class="sub" id="sub">
-        Uwaga: przycisk „Nie” jest dzisiaj szybki jak kot po kawie ☕🐈
+        Sandrusiu… jeśli mogę wybrać jedno: zawsze wybieram Ciebie. 💞
+        I obiecuję: będę Twoim spokojem, Twoim śmiechem i Twoim „wow”. ❤️
+        (A „Nie” jest dzisiaj tylko dla żartu 😈)
       </p>
+
+      <!-- 2 teddies + heart -->
+      <div class="teddyWrap" aria-label="Dwa misie i serce">
+        <div class="teddyTitle">
+          <div class="line">🧸 Ja (z lewej) + Sandra (z prawej) = serce pośrodku 💖</div>
+          <div class="chip">nasza mała bajka</div>
+        </div>
+
+        <svg class="teddySvg" viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dwa misie i serce">
+          <defs>
+            <linearGradient id="furL" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f3c79e"/>
+              <stop offset="1" stop-color="#d6a67e"/>
+            </linearGradient>
+            <linearGradient id="furR" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f0b8c9"/>
+              <stop offset="1" stop-color="#d88ea7"/>
+            </linearGradient>
+            <linearGradient id="heartG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff4d7d"/>
+              <stop offset="1" stop-color="#ffd66e"/>
+            </linearGradient>
+            <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2.8" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="rgba(0,0,0,.35)"/>
+            </filter>
+          </defs>
+
+          <!-- LEFT teddy -->
+          <g transform="translate(150,40)" filter="url(#shadow)">
+            <circle cx="40" cy="40" r="28" fill="url(#furL)"/>
+            <circle cx="140" cy="40" r="28" fill="url(#furL)"/>
+            <circle cx="40" cy="40" r="14" fill="rgba(255,255,255,.25)"/>
+            <circle cx="140" cy="40" r="14" fill="rgba(255,255,255,.25)"/>
+
+            <circle cx="90" cy="80" r="58" fill="url(#furL)"/>
+            <circle cx="70" cy="78" r="6" fill="#14121a"/>
+            <circle cx="110" cy="78" r="6" fill="#14121a"/>
+
+            <ellipse cx="90" cy="98" rx="26" ry="20" fill="rgba(255,255,255,.22)"/>
+            <circle cx="90" cy="96" r="6" fill="#14121a"/>
+            <path d="M90 102 C82 108, 80 114, 76 118" stroke="#14121a" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M90 102 C98 108, 100 114, 104 118" stroke="#14121a" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+            <ellipse cx="90" cy="170" rx="70" ry="62" fill="url(#furL)"/>
+            <ellipse cx="34" cy="176" rx="28" ry="22" fill="url(#furL)"/>
+            <ellipse cx="146" cy="176" rx="28" ry="22" fill="url(#furL)"/>
+            <ellipse cx="34" cy="176" rx="14" ry="10" fill="rgba(255,255,255,.22)"/>
+            <ellipse cx="146" cy="176" rx="14" ry="10" fill="rgba(255,255,255,.22)"/>
+
+            <path d="M90 156
+                     C90 145, 74 145, 74 157
+                     C74 173, 90 182, 90 192
+                     C90 182, 106 173, 106 157
+                     C106 145, 90 145, 90 156 Z"
+                  fill="rgba(255,77,125,.55)"/>
+          </g>
+
+          <!-- RIGHT teddy -->
+          <g transform="translate(610,40)" filter="url(#shadow)">
+            <circle cx="40" cy="40" r="28" fill="url(#furR)"/>
+            <circle cx="140" cy="40" r="28" fill="url(#furR)"/>
+            <circle cx="40" cy="40" r="14" fill="rgba(255,255,255,.25)"/>
+            <circle cx="140" cy="40" r="14" fill="rgba(255,255,255,.25)"/>
+
+            <circle cx="90" cy="80" r="58" fill="url(#furR)"/>
+            <circle cx="70" cy="78" r="6" fill="#14121a"/>
+            <circle cx="110" cy="78" r="6" fill="#14121a"/>
+
+            <ellipse cx="90" cy="98" rx="26" ry="20" fill="rgba(255,255,255,.22)"/>
+            <circle cx="90" cy="96" r="6" fill="#14121a"/>
+            <path d="M90 102 C82 108, 80 114, 76 118" stroke="#14121a" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M90 102 C98 108, 100 114, 104 118" stroke="#14121a" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+            <ellipse cx="90" cy="170" rx="70" ry="62" fill="url(#furR)"/>
+            <ellipse cx="34" cy="176" rx="28" ry="22" fill="url(#furR)"/>
+            <ellipse cx="146" cy="176" rx="28" ry="22" fill="url(#furR)"/>
+            <ellipse cx="34" cy="176" rx="14" ry="10" fill="rgba(255,255,255,.22)"/>
+            <ellipse cx="146" cy="176" rx="14" ry="10" fill="rgba(255,255,255,.22)"/>
+
+            <path d="M88 54 C78 46, 70 46, 64 56 C70 68, 80 66, 88 60 Z" fill="rgba(255,255,255,.35)"/>
+            <path d="M92 54 C102 46, 110 46, 116 56 C110 68, 100 66, 92 60 Z" fill="rgba(255,255,255,.35)"/>
+            <circle cx="90" cy="58" r="6" fill="rgba(255,255,255,.45)"/>
+          </g>
+
+          <!-- middle heart -->
+          <g transform="translate(418,72)" filter="url(#soft)">
+            <path d="M32 24
+                     C32 12, 12 12, 12 28
+                     C12 44, 32 52, 32 68
+                     C32 52, 52 44, 52 28
+                     C52 12, 32 12, 32 24 Z"
+                  fill="url(#heartG)"/>
+            <path d="M24 22 C26 16, 34 14, 40 18" stroke="rgba(255,255,255,.55)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </g>
+
+          <g opacity="0.9">
+            <circle cx="445" cy="72" r="3" fill="#ffd66e"/>
+            <circle cx="468" cy="92" r="2.5" fill="#35d3ff"/>
+            <circle cx="418" cy="104" r="2.5" fill="#ff4d7d"/>
+            <circle cx="488" cy="122" r="3" fill="#ffffff"/>
+            <circle cx="405" cy="78" r="2.5" fill="#ffffff"/>
+          </g>
+        </svg>
+
+        <div class="labels">
+          <div>🧸 <b>Ja</b></div>
+          <div>❤️ <b>My</b></div>
+          <div><b>Sandra</b> 🧸</div>
+        </div>
+      </div>
 
       <div class="stage">
         <div class="actions" id="arena" aria-label="Wybór">
-          <button id="yesBtn">Tak 💖</button>
+          <button id="yesBtn">Tak 💘</button>
           <button id="noBtn" aria-label="Nie">Nie 🙃</button>
-          <div class="hint" id="hint">Spróbuj kliknąć „Nie”… o ile dasz radę 😈</div>
+          <div class="hint" id="hint">Spróbuj kliknąć „Nie”… jeśli w ogóle je złapiesz 😉</div>
         </div>
 
         <div class="result" id="result"></div>
 
-        <div class="comic" id="comic" style="display:none;">
+        <div class="comic" id="comic">
           <div class="sticker">
             <div class="icon">🎆</div>
             <div>
-              <b>Feuerwerk</b>
-              <span>bo „Tak” zasługuje na efekt WOW</span>
+              <b>Fajerwerki</b>
+              <span>bo „Tak” to nasz mały wybuch szczęścia</span>
             </div>
           </div>
           <div class="sticker">
-            <div class="icon">😂</div>
+            <div class="icon">💗</div>
             <div>
-              <b>Tryb śmieszny</b>
-              <span>„Nie” jest tu tylko dla dekoracji</span>
+              <b>Serduszka</b>
+              <span>bo Ty jesteś moim ulubionym uczuciem</span>
             </div>
           </div>
           <div class="sticker">
-            <div class="icon">💞</div>
+            <div class="icon">✨</div>
             <div>
-              <b>Tryb romantyczny</b>
-              <span>bo ja… serio… mocno 💘</span>
+              <b>Magia</b>
+              <span>bo przy Tobie wszystko jest piękniejsze</span>
             </div>
           </div>
         </div>
 
         <div class="panel" id="panel">
           <h2 id="qTitle">Pytanie 1/3</h2>
-
           <div class="q" id="qBox"></div>
-
           <div class="tiny" id="tiny">
-            (Spokojnie. To tylko nasza walentynkowa „ankieta miłości” 😄)
+            To nasza walentynkowa ankieta — ale odpowiedzi i tak prowadzą do jednego: „Ty”. 💞
           </div>
         </div>
       </div>
@@ -379,41 +554,35 @@
   <canvas class="fx" id="fx"></canvas>
 
   <script>
-    // ====== USTAWIENIA (zmieniasz tylko tu) ======
     const NAME = "Sandra";
-
-    // WhatsApp "direct-to-you":
-    // format: kraj+numer bez plusa i bez spacji
-    // dla +43 676 7888866 -> "436767888866"
     const YOUR_WA_NUMBER = "436767888866";
 
-    // ====== TEKSTY ======
     const NO_HINTS = [
-      "„Nie” właśnie zrobiło unik ninja 🥷",
-      "„Nie” mówi: „spróbuj jeszcze raz” 😇",
+      "„Nie” właśnie zrobiło unik jak ninja 🥷",
+      "„Nie” jest dzisiaj płochliwe… jak kotek 😼",
       "Oho… „Nie” uciekło. Znowu. 🙃",
-      "„Nie” poszło na urlop 🏝️",
-      "„Nie” ma dziś wolne. Serio. 😈",
-      "„Nie” jest tylko atrapą. 🤫"
+      "„Nie” ma dziś wolne. Oficjalnie. 😈",
+      "„Nie” jest tu tylko dekoracją 🤫",
+      "„Nie” mówi: „spróbuj jeszcze raz” 😇"
     ];
 
     const YES_HEADLINES = [
       "TAAAK! 💖",
       "Okej… to oficjalne 🥰",
       "No to pięknie! 💘",
-      "Wygrałem! (a Ty też) 😄💞"
+      "Właśnie wygrałem serce Sandrusi 😄💞"
     ];
 
     const LOVE_LINES = [
-      "Właśnie zrobiłaś mi dzień. I tydzień. I cały luty. 😅",
-      "Uwaga: teraz uruchamia się tryb turbo-romantyczny ✨",
-      "Nie ma odwrotu. Zostałaś moją walentynką. 😌💘"
+      "Dla mojej Sandrusi — zawsze i wszędzie. 💖",
+      "Kocham Cię tak, że nawet nie potrafię tego zamknąć w zdaniu. ❤️",
+      "Z Tobą wszystko ma sens. 💞",
+      "Jesteś moją ulubioną osobą na świecie. I już. 💗"
     ];
 
-    // ====== DOM ======
     const gfName = document.getElementById("gfName");
-    const chip   = document.getElementById("chip");
-    const sub    = document.getElementById("sub");
+    gfName.textContent = NAME;
+
     const yesBtn = document.getElementById("yesBtn");
     const noBtn  = document.getElementById("noBtn");
     const arena  = document.getElementById("arena");
@@ -425,15 +594,10 @@
     const comic  = document.getElementById("comic");
     const hearts = document.getElementById("hearts");
 
-    gfName.textContent = NAME;
-    chip.textContent = `✨ tylko dla ${NAME}`;
-
-    // ====== FUNKCJE POMOCNICZE ======
     const rnd = (min,max)=> Math.random()*(max-min)+min;
     const pick = (arr)=> arr[Math.floor(Math.random()*arr.length)];
-    function clamp(n,min,max){ return Math.max(min, Math.min(max,n)); }
+    const clamp = (n,min,max)=> Math.max(min, Math.min(max,n));
 
-    // ====== "NIE" UCIEKA ======
     function moveNoButton() {
       const a = arena.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
@@ -450,80 +614,69 @@
       noBtn.style.transform = "none";
       hint.textContent = pick(NO_HINTS);
 
-      // mały „puf” efekt
-      burstAt(x + b.width/2, y + b.height/2, 12, true);
+      burstAt(x + b.width/2, y + b.height/2, 22, true);
     }
-
     noBtn.addEventListener("mouseenter", moveNoButton);
     noBtn.addEventListener("click", (e)=>{ e.preventDefault(); moveNoButton(); });
     noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); moveNoButton(); }, { passive:false });
-
     setTimeout(moveNoButton, 260);
 
-    // ====== HEARTS BACKGROUND ======
     let heartTimer = null;
     function startHearts(){
       if(heartTimer) return;
       heartTimer = setInterval(()=>{
         const el = document.createElement("div");
         el.className = "heart";
-        el.textContent = Math.random() < .7 ? "💗" : (Math.random()<.5 ? "💖" : "💘");
+        const pool = ["💗","💖","💘","❤️","💕","💞","💝"];
+        el.textContent = pool[Math.floor(Math.random()*pool.length)];
         el.style.left = rnd(0, 100) + "vw";
-        el.style.setProperty("--dx", rnd(-20,20) + "vw");
-        el.style.animationDuration = rnd(4.5, 7.5) + "s";
-        el.style.opacity = "0";
+        el.style.setProperty("--dx", rnd(-24,24) + "vw");
+        el.style.animationDuration = rnd(4.0, 7.0) + "s";
         hearts.appendChild(el);
-        setTimeout(()=> el.remove(), 8000);
-      }, 320);
-    }
-    function stopHearts(){
-      clearInterval(heartTimer);
-      heartTimer = null;
+        setTimeout(()=> el.remove(), 8200);
+      }, 220);
     }
 
-    // ====== FRAGEN-FLOW (nach "TAK") ======
     const answers = { like:null, nextDate:null, love:null };
 
     const steps = [
       {
         title: "Pytanie 1/3",
         render: () => `
-          <div>Podoba Ci się ta strona? 😄</div>
+          <div>Sandrusiu… czy podoba Ci się ta niespodzianka? 🥺💗</div>
           <div class="row">
-            <button class="btnOk" data-a="like" data-v="Tak, jest urocza 💖">Tak, jest urocza 💖</button>
-            <button class="btnDark" data-a="like" data-v="Tak, ale chcę jeszcze więcej efektów 😂">Tak, ale chcę więcej efektów 😂</button>
+            <button class="btnOk" data-a="like" data-v="Tak, jest przeurocza 💖">Tak, jest przeurocza 💖</button>
+            <button class="btnPrimary" data-a="like" data-v="Tak, i zrobiło mi się cieplutko 🥰">Tak, cieplutko 🥰</button>
+            <button class="btnDark" data-a="like" data-v="Tak, ale chcę jeszcze więcej serduszek 😂💞">Więcej serduszek 😂💞</button>
           </div>
         `
       },
       {
         title: "Pytanie 2/3",
         render: () => `
-          <div>Kiedy nasze następne spotkanie/randka? 💘</div>
+          <div>Kiedy nasza następna randka? 💘</div>
           <div class="row">
-            <button class="btnPrimary" data-a="nextDate" data-v="W piątek wieczorem ✨">W piątek wieczorem ✨</button>
-            <button class="btnPrimary" data-a="nextDate" data-v="W sobotę (i robimy coś fajnego) 😄">W sobotę 😄</button>
-            <button class="btnDark" data-a="nextDate" data-v="Ty wybierasz – ja jestem na tak 🥰">Ty wybierasz 🥰</button>
+            <button class="btnPrimary" data-a="nextDate" data-v="Piątek wieczór ✨">Piątek wieczór ✨</button>
+            <button class="btnPrimary" data-a="nextDate" data-v="Sobota 🥰">Sobota 🥰</button>
+            <button class="btnDark" data-a="nextDate" data-v="Ty wybierasz 💞">Ty wybierasz 💞</button>
           </div>
         `
       },
       {
         title: "Pytanie 3/3",
         render: () => `
-          <div>Ostatnie i najważniejsze… Kochasz mnie? 😳❤️</div>
+          <div>Najważniejsze… kochasz mnie? 😳❤️</div>
           <div class="row">
             <button class="btnOk" data-a="love" data-v="Tak ❤️">Tak ❤️</button>
-            <button class="btnDark" data-a="love" data-v="Bardzo! 💘">Bardzo! 💘</button>
-            <button class="btnDark" data-a="love" data-v="Jeszcze jak! 😄💞">Jeszcze jak! 😄💞</button>
+            <button class="btnPrimary" data-a="love" data-v="Bardzo 💘">Bardzo 💘</button>
+            <button class="btnDark" data-a="love" data-v="Jeszcze jak 💞😄">Jeszcze jak 💞😄</button>
           </div>
-          <div class="tiny">Po kliknięciu przygotuję wiadomość na WhatsApp i wyślesz ją do mnie jednym tapnięciem.</div>
+          <div class="tiny">Na końcu przygotuję wiadomość do wysłania na WhatsApp (prosto do mnie).</div>
         `
       }
     ];
 
-    let stepIndex = 0;
-
     function showStep(i){
-      stepIndex = i;
       panel.style.display = "block";
       qTitle.textContent = steps[i].title;
       qBox.innerHTML = steps[i].render();
@@ -534,7 +687,6 @@
           const v = btn.getAttribute("data-v");
           answers[a] = v;
 
-          // małe efekty przy każdej odpowiedzi
           megaPop();
           if(i < steps.length - 1) showStep(i+1);
           else finishFlow();
@@ -544,66 +696,56 @@
 
     function finishFlow(){
       qTitle.textContent = "Gotowe ✅";
-      const msg =
-`${NAME} 💖
-1) Podobała mi się strona: ${answers.like}
-2) Następna randka: ${answers.nextDate}
-3) Kocham Cię: ${answers.love}
 
-PS. Tak, zostaję Twoją walentynką 😄💘`;
+      const msg =
+        `Dla mojej Sandrusi 💖 — odpowiedzi: ` +
+        `Podobało mi się: ${answers.like}; ` +
+        `Następna randka: ${answers.nextDate}; ` +
+        `Kocham Cię: ${answers.love}. ` +
+        `PS. Zostaję Twoją walentynką 😄💘`;
 
       qBox.innerHTML = `
         <div style="line-height:1.45; color:var(--muted);">
-          Perfekcyjnie. Teraz kliknij poniżej i wyślij mi to na WhatsApp 😄
+          Idealnie. Kliknij poniżej i wyślij mi to na WhatsApp 😄💞
         </div>
         <div class="row" style="margin-top:12px;">
           <button class="btnOk" id="copyBtn">Skopiuj wiadomość</button>
           <a class="btn btnPrimary" id="waBtn" href="#" target="_blank" rel="noopener">Wyślij na WhatsApp</a>
         </div>
-        <div class="tiny">Jeśli WhatsApp się nie otworzy, skopiuj wiadomość i wklej ręcznie.</div>
+        <div class="tiny">Jeśli WhatsApp nie otworzy się automatycznie, skopiuj wiadomość i wklej ręcznie.</div>
       `;
 
-      // WhatsApp direct:
       const waUrl = `https://wa.me/${YOUR_WA_NUMBER}?text=` + encodeURIComponent(msg);
-      const waBtn = document.getElementById("waBtn");
-      waBtn.href = waUrl;
+      document.getElementById("waBtn").href = waUrl;
 
-      const copyBtn = document.getElementById("copyBtn");
-      copyBtn.onclick = async () => {
+      document.getElementById("copyBtn").onclick = async () => {
+        const btn = document.getElementById("copyBtn");
         try{
           await navigator.clipboard.writeText(msg);
-          copyBtn.textContent = "Skopiowane ✅";
-          setTimeout(()=>copyBtn.textContent="Skopiuj wiadomość", 1400);
+          btn.textContent = "Skopiowane ✅";
+          setTimeout(()=>btn.textContent="Skopiuj wiadomość", 1400);
         }catch{
-          copyBtn.textContent = "Nie mogę skopiować 😅";
-          setTimeout(()=>copyBtn.textContent="Skopiuj wiadomość", 1400);
+          btn.textContent = "Nie mogę skopiować 😅";
+          setTimeout(()=>btn.textContent="Skopiuj wiadomość", 1400);
         }
       };
 
-      // Final celebration
       finaleShow();
     }
 
-    // ====== CLICK "TAK" ======
     yesBtn.addEventListener("click", ()=>{
       yesBtn.disabled = true;
       noBtn.disabled = true;
 
-      const headline = pick(YES_HEADLINES);
-      const line = pick(LOVE_LINES);
-
-      result.textContent = `${headline} ${line}`;
-      sub.textContent = "Dobra. Teraz będzie romantycznie i trochę śmiesznie 😄💞";
-
+      result.textContent = `${pick(YES_HEADLINES)} ${pick(LOVE_LINES)}`;
       comic.style.display = "flex";
-      startHearts();
 
-      // duży start-show: konfetti + mini-fireworks
+      startHearts();
       finaleBurst();
       showStep(0);
     });
 
-    // ====== CANVAS: konfetti + fireworks ======
+    // ====== Effects canvas ======
     const canvas = document.getElementById("fx");
     const ctx = canvas.getContext("2d");
     function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
@@ -620,7 +762,6 @@ PS. Tak, zostaję Twoją walentynką 😄💘`;
       }
     }
 
-    // type: "conf" | "spark"
     function tick(){
       ctx.clearRect(0,0,canvas.width,canvas.height);
       const gravity = 0.06;
@@ -656,85 +797,80 @@ PS. Tak, zostaję Twoją walentynką 😄💘`;
 
       ctx.globalAlpha = 1;
 
-      if(particles.length){
-        requestAnimationFrame(tick);
-      }else{
-        running = false;
-      }
+      if(particles.length) requestAnimationFrame(tick);
+      else running = false;
     }
 
-    function confettiRain(intensity=220){
-      const cx = innerWidth/2, cy = innerHeight*0.25;
-      const colors = ["#ff4d7d","#35d3ff","#ffd66e","#ffffff","#35ff9a","#caa7ff"];
+    const colors = ["#ff4d7d","#35d3ff","#ffd66e","#ffffff","#35ff9a","#caa7ff"];
+
+    function confettiRain(intensity=760){
+      const cx = innerWidth/2, cy = innerHeight*0.22;
       const list = [];
       for(let i=0;i<intensity;i++){
         list.push({
           type:"conf",
-          x: cx + rnd(-120,120),
-          y: cy + rnd(-60,60),
-          vx: rnd(-2.6,2.6),
-          vy: rnd(-3.2,1.5),
-          s: rnd(6,11),
+          x: cx + rnd(-160,160),
+          y: cy + rnd(-90,90),
+          vx: rnd(-3.6,3.6),
+          vy: rnd(-4.2,2.2),
+          s: rnd(6,12),
           rot: rnd(0, Math.PI*2),
-          vr: rnd(-0.12,0.12),
+          vr: rnd(-0.16,0.16),
           c: colors[Math.floor(rnd(0, colors.length))],
           a: 1,
-          life: Math.floor(rnd(120, 220))
+          life: Math.floor(rnd(150, 290))
         });
       }
       addParticles(list);
     }
 
-    function burstAt(x,y,count=38, soft=false){
-      const colors = soft ? ["#ffffff","#ffd66e","#ff4d7d"] : ["#ff4d7d","#35d3ff","#ffd66e","#35ff9a","#caa7ff","#ffffff"];
+    function burstAt(x,y,count=140, soft=false){
+      const palette = soft ? ["#ffffff","#ffd66e","#ff4d7d","#caa7ff"] : ["#ff4d7d","#35d3ff","#ffd66e","#35ff9a","#caa7ff","#ffffff"];
       const list = [];
       for(let i=0;i<count;i++){
         const ang = rnd(0, Math.PI*2);
-        const sp  = soft ? rnd(0.7,2.6) : rnd(1.4,5.2);
+        const sp  = soft ? rnd(0.9,3.4) : rnd(1.8,6.8);
         list.push({
           type:"spark",
           x, y,
           vx: Math.cos(ang)*sp,
-          vy: Math.sin(ang)*sp - (soft ? 0.2 : 0.8),
-          s: rnd(1.5, 3.4),
-          c: colors[Math.floor(rnd(0, colors.length))],
+          vy: Math.sin(ang)*sp - (soft ? 0.2 : 1.1),
+          s: rnd(1.6, 4.1),
+          c: palette[Math.floor(rnd(0, palette.length))],
           a: 1,
-          life: Math.floor(rnd(60, 120))
+          life: Math.floor(rnd(80, 155))
         });
       }
       addParticles(list);
     }
 
     function finaleBurst(){
-      confettiRain(260);
-      // kilka fajerwerków w losowych miejscach
-      for(let i=0;i<6;i++){
+      confettiRain(820);
+      for(let i=0;i<16;i++){
         setTimeout(()=>{
-          burstAt(rnd(innerWidth*0.2, innerWidth*0.8), rnd(innerHeight*0.18, innerHeight*0.6), 60, false);
-        }, i*140);
+          burstAt(rnd(innerWidth*0.12, innerWidth*0.88), rnd(innerHeight*0.08, innerHeight*0.66), 170, false);
+        }, i*95);
       }
     }
 
     function megaPop(){
-      confettiRain(120);
-      burstAt(rnd(innerWidth*0.3, innerWidth*0.7), rnd(innerHeight*0.25, innerHeight*0.6), 52, true);
+      confettiRain(320);
+      burstAt(rnd(innerWidth*0.25, innerWidth*0.75), rnd(innerHeight*0.16, innerHeight*0.68), 120, true);
     }
 
     function finaleShow(){
-      // jeszcze więcej, ale krótko
-      for(let i=0;i<10;i++){
+      confettiRain(980);
+      for(let i=0;i<20;i++){
         setTimeout(()=>{
-          burstAt(rnd(innerWidth*0.18, innerWidth*0.82), rnd(innerHeight*0.12, innerHeight*0.65), 70, false);
-        }, i*120);
+          burstAt(rnd(innerWidth*0.10, innerWidth*0.90), rnd(innerHeight*0.08, innerHeight*0.72), 200, false);
+        }, i*85);
       }
-      confettiRain(320);
     }
 
-    // przy kliknięciu w tło też mały efekt (fajne na mobilu)
     document.addEventListener("click", (e)=>{
-      const target = e.target;
-      if(target && (target.tagName === "BUTTON" || target.tagName === "A")) return;
-      burstAt(e.clientX, e.clientY, 24, true);
+      const t = e.target;
+      if(t && (t.tagName === "BUTTON" || t.tagName === "A")) return;
+      burstAt(e.clientX, e.clientY, 46, true);
     });
   </script>
 </body>
