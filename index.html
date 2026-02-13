@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="color-scheme" content="dark" />
-  <title>Only for Sandra ❤️</title>
+  <title>Dla mojej Sandrusi 💖</title>
   <meta name="description" content="Sandra, zostaniesz moją walentynką?" />
 
   <style>
@@ -23,6 +23,8 @@
     }
     *{ box-sizing:border-box; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
     html,body{ height:100%; }
+
+    /* ✅ IMPORTANT: allow scrolling (fixes "buttons under page") */
     body{
       margin:0;
       color:var(--text);
@@ -31,7 +33,9 @@
         radial-gradient(900px 620px at 82% 26%, rgba(53,211,255,.16), transparent 62%),
         radial-gradient(980px 980px at 35% 86%, rgba(255,214,110,.12), transparent 68%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
-      overflow:hidden;
+      overflow-x:hidden;
+      overflow-y:auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .stars{
@@ -46,6 +50,7 @@
       opacity:.34;
       pointer-events:none;
       filter: blur(.1px);
+      z-index:0;
     }
 
     .hearts{
@@ -68,10 +73,12 @@
       100%{ transform: translateY(-125vh) translateX(var(--dx)) scale(1.55) rotate(18deg); opacity:0; }
     }
 
+    /* ✅ IMPORTANT: do not vertically center the whole page (supports scrolling) */
     .wrap{
-      min-height:100%;
-      display:grid;
-      place-items:center;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
       padding:24px;
       position:relative;
       z-index:2;
@@ -100,7 +107,6 @@
       pointer-events:none;
     }
 
-    /* Header */
     .header{
       display:flex;
       align-items:center;
@@ -165,7 +171,6 @@
       line-height:1.45;
     }
 
-    /* Teddy block */
     .teddyWrap{
       margin-top: 10px;
       border-radius: 24px;
@@ -313,6 +318,7 @@
       border-radius: 18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
+      scroll-margin-top: 16px; /* helps scrollIntoView */
     }
     .panel h2{
       margin: 0 0 10px;
@@ -350,7 +356,6 @@
       line-height:1.35;
     }
 
-    /* Loading overlay (adds "time invested" feel) */
     .loader{
       position:fixed; inset:0; z-index:10;
       display:grid; place-items:center;
@@ -368,8 +373,6 @@
       box-shadow: var(--shadow);
       text-align:center;
     }
-    .loaderCard b{ font-weight:1000; }
-    .dots{ letter-spacing:2px; }
 
     canvas.fx{
       position:fixed; inset:0;
@@ -390,9 +393,9 @@
 
   <div class="loader" id="loader">
     <div class="loaderCard">
-      <div style="font-size:18px">Ładowanie miłości<span class="dots">…</span> 💖</div>
+      <div style="font-size:18px">Ładowanie miłości… 💖</div>
       <div style="margin-top:8px; color:var(--muted); font-size:12px">
-        Only for Sandra ❤️
+        Dla mojej Sandrusi
       </div>
     </div>
   </div>
@@ -409,7 +412,7 @@
             <strong>dla mojej Sandrusi 💖</strong>
           </div>
         </div>
-        <div class="chip">✨ unikat • <b>Only for Sandra</b></div>
+        <div class="chip">✨ unikat • <b>tylko dla Sandry</b></div>
       </div>
 
       <h1><span class="name" id="gfName">Sandra</span>, zostaniesz moją walentynką? 💘</h1>
@@ -517,9 +520,10 @@
           </g>
         </svg>
 
+        <!-- ✅ "My" removed, heart stays -->
         <div class="labels">
           <div>🧸 <b>Ja</b></div>
-          <div>❤️ <b>My</b></div>
+          <div>❤️</div>
           <div><b>Sandra</b> 🧸</div>
         </div>
       </div>
@@ -551,10 +555,11 @@
   <canvas class="fx" id="fx"></canvas>
 
   <script>
-    // Hide loader after a short "premium" intro
+    // Loader
     const loader = document.getElementById("loader");
     setTimeout(()=> loader.classList.add("hide"), 900);
 
+    // WhatsApp number (country code + number, no plus)
     const YOUR_WA_NUMBER = "436767888866";
 
     const NO_HINTS = [
@@ -595,6 +600,7 @@
     const pick = (arr)=> arr[Math.floor(Math.random()*arr.length)];
     const clamp = (n,min,max)=> Math.max(min, Math.min(max,n));
 
+    // "Nie" runs away
     function moveNoButton() {
       const a = arena.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
@@ -618,6 +624,7 @@
     noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); moveNoButton(); }, { passive:false });
     setTimeout(moveNoButton, 260);
 
+    // Floating hearts
     let heartTimer = null;
     function startHearts(){
       if(heartTimer) return;
@@ -634,6 +641,7 @@
       }, 210);
     }
 
+    // Quiz
     const answers = { like:null, nextDate:null, love:null };
     const steps = [
       {
@@ -682,6 +690,9 @@
           const a = btn.getAttribute("data-a");
           const v = btn.getAttribute("data-v");
           answers[a] = v;
+
+;
+
           megaPop();
           if(i < steps.length - 1) showStep(i+1);
           else finishFlow();
@@ -692,8 +703,9 @@
     function finishFlow(){
       qTitle.textContent = "Gotowe ✅";
 
+      // single-line message (safe for iPhone WhatsApp)
       const msg =
-        `Only for Sandra ❤️ — odpowiedzi: ` +
+        `Dla mojej Sandrusi 💖 — odpowiedzi: ` +
         `Podobało mi się: ${answers.like}; ` +
         `Następna randka: ${answers.nextDate}; ` +
         `Kocham Cię: ${answers.love}. ` +
@@ -710,7 +722,8 @@
         <div class="tiny">Jeśli WhatsApp nie otworzy się automatycznie, skopiuj wiadomość i wklej ręcznie.</div>
       `;
 
-      document.getElementById("waBtn").href = `https://wa.me/${YOUR_WA_NUMBER}?text=` + encodeURIComponent(msg);
+      document.getElementById("waBtn").href =
+        `https://wa.me/${YOUR_WA_NUMBER}?text=` + encodeURIComponent(msg);
 
       document.getElementById("copyBtn").onclick = async () => {
         const btn = document.getElementById("copyBtn");
@@ -724,17 +737,29 @@
         }
       };
 
+      // scroll again to the buttons (safe)
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 120);
+
       finaleShow();
     }
 
+    // ✅ click YES: show quiz + auto-scroll so nothing is hidden
     yesBtn.addEventListener("click", ()=>{
       yesBtn.disabled = true;
       noBtn.disabled = true;
+
       result.textContent = `${pick(YES_HEADLINES)} ${pick(LOVE_LINES)}`;
       comic.style.display = "flex";
+
       startHearts();
       finaleBurst();
       showStep(0);
+
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 250);
     });
 
     // Effects canvas
@@ -778,6 +803,7 @@
         }
       }
       ctx.globalAlpha = 1;
+
       if(particles.length) requestAnimationFrame(tick);
       else running = false;
     }
@@ -848,6 +874,7 @@
       }
     }
 
+    // subtle sparkles on background click
     document.addEventListener("click", (e)=>{
       const t = e.target;
       if(t && (t.tagName === "BUTTON" || t.tagName === "A")) return;
