@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="color-scheme" content="dark" />
-  <title>Dla mojej Sandrusi 🧸💖</title>
+  <title>Only for Sandra ❤️</title>
   <meta name="description" content="Sandra, zostaniesz moją walentynką?" />
 
   <style>
@@ -64,7 +64,7 @@
     }
     @keyframes floatUp{
       0% { transform: translateY(0) translateX(0) scale(.9) rotate(0deg); opacity:0; }
-      12%{ opacity:.9; }
+      12%{ opacity:.92; }
       100%{ transform: translateY(-125vh) translateX(var(--dx)) scale(1.55) rotate(18deg); opacity:0; }
     }
 
@@ -78,7 +78,7 @@
     }
 
     .card{
-      width:min(780px, 92vw);
+      width:min(820px, 92vw);
       border-radius: 30px;
       background: linear-gradient(135deg, var(--card), var(--card2));
       border:1px solid rgba(255,255,255,.14);
@@ -100,7 +100,7 @@
       pointer-events:none;
     }
 
-    /* NEW HEADER (replaces "Tryb: Walentynki Deluxe") */
+    /* Header */
     .header{
       display:flex;
       align-items:center;
@@ -153,7 +153,7 @@
 
     h1{
       margin: 10px 0 6px;
-      font-size: clamp(22px, 3.2vw, 38px);
+      font-size: clamp(22px, 3.2vw, 40px);
       letter-spacing:-.55px;
       line-height:1.12;
     }
@@ -212,7 +212,7 @@
     }
 
     .actions{
-      height: 190px;
+      height: 215px;
       position: relative;
       margin-top: 10px;
     }
@@ -245,8 +245,8 @@
       position:absolute;
       left: 50%;
       transform: translateX(-115%);
-      top: 66px;
-      min-width: 158px;
+      top: 78px;
+      min-width: 160px;
     }
     #noBtn{
       background: rgba(255,255,255,.14);
@@ -255,8 +255,8 @@
       position:absolute;
       left: 50%;
       transform: translateX(15%);
-      top: 66px;
-      min-width: 158px;
+      top: 78px;
+      min-width: 160px;
     }
 
     .hint{
@@ -285,7 +285,7 @@
       flex-wrap:wrap;
     }
     .sticker{
-      flex: 1 1 220px;
+      flex: 1 1 240px;
       border-radius: 18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.05);
@@ -350,6 +350,27 @@
       line-height:1.35;
     }
 
+    /* Loading overlay (adds "time invested" feel) */
+    .loader{
+      position:fixed; inset:0; z-index:10;
+      display:grid; place-items:center;
+      background: rgba(7,10,24,.78);
+      backdrop-filter: blur(8px);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .loader.hide{ opacity:0; pointer-events:none; transform: scale(1.02); }
+    .loaderCard{
+      width:min(420px, 88vw);
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.07);
+      padding: 18px 16px;
+      box-shadow: var(--shadow);
+      text-align:center;
+    }
+    .loaderCard b{ font-weight:1000; }
+    .dots{ letter-spacing:2px; }
+
     canvas.fx{
       position:fixed; inset:0;
       pointer-events:none;
@@ -357,8 +378,8 @@
     }
 
     @media (max-width: 420px){
-      .actions{ height: 215px; }
-      #yesBtn, #noBtn{ min-width: 152px; }
+      .actions{ height: 235px; }
+      #yesBtn, #noBtn{ min-width: 150px; }
     }
   </style>
 </head>
@@ -367,34 +388,41 @@
   <div class="stars"></div>
   <div class="hearts" id="hearts"></div>
 
+  <div class="loader" id="loader">
+    <div class="loaderCard">
+      <div style="font-size:18px">Ładowanie miłości<span class="dots">…</span> 💖</div>
+      <div style="margin-top:8px; color:var(--muted); font-size:12px">
+        Only for Sandra ❤️
+      </div>
+    </div>
+  </div>
+
   <div class="wrap">
     <div class="card">
       <div class="glow"></div>
 
-      <!-- NEW TOP BAR -->
       <div class="header">
         <div class="sig">
-          <div class="seal">🧸</div>
+          <div class="seal">❤️</div>
           <div class="text">
-            <small>specjalnie przygotowane</small>
+            <small>ręcznie zrobione, bez kopiuj-wklej</small>
             <strong>dla mojej Sandrusi 💖</strong>
           </div>
         </div>
-        <div class="chip">✨ unikat • <b>tylko dla Sandry</b></div>
+        <div class="chip">✨ unikat • <b>Only for Sandra</b></div>
       </div>
 
       <h1><span class="name" id="gfName">Sandra</span>, zostaniesz moją walentynką? 💘</h1>
       <p class="sub" id="sub">
-        Sandrusiu… jeśli mogę wybrać jedno: zawsze wybieram Ciebie. 💞
-        I obiecuję: będę Twoim spokojem, Twoim śmiechem i Twoim „wow”. ❤️
+        Sandrusiu… ta strona powstała tylko dla Ciebie. 💗
+        Z myślą o Tobie, z sercem i z uśmiechem. 💞
         (A „Nie” jest dzisiaj tylko dla żartu 😈)
       </p>
 
-      <!-- 2 teddies + heart -->
       <div class="teddyWrap" aria-label="Dwa misie i serce">
         <div class="teddyTitle">
-          <div class="line">🧸 Ja (z lewej) + Sandra (z prawej) = serce pośrodku 💖</div>
-          <div class="chip">nasza mała bajka</div>
+          <div class="line">🧸 Ja (z lewej) + Sandra (z prawej) = ❤️ pośrodku</div>
+          <div class="chip">zawsze my</div>
         </div>
 
         <svg class="teddySvg" viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dwa misie i serce">
@@ -423,7 +451,6 @@
             </filter>
           </defs>
 
-          <!-- LEFT teddy -->
           <g transform="translate(150,40)" filter="url(#shadow)">
             <circle cx="40" cy="40" r="28" fill="url(#furL)"/>
             <circle cx="140" cy="40" r="28" fill="url(#furL)"/>
@@ -453,7 +480,6 @@
                   fill="rgba(255,77,125,.55)"/>
           </g>
 
-          <!-- RIGHT teddy -->
           <g transform="translate(610,40)" filter="url(#shadow)">
             <circle cx="40" cy="40" r="28" fill="url(#furR)"/>
             <circle cx="140" cy="40" r="28" fill="url(#furR)"/>
@@ -480,7 +506,6 @@
             <circle cx="90" cy="58" r="6" fill="rgba(255,255,255,.45)"/>
           </g>
 
-          <!-- middle heart -->
           <g transform="translate(418,72)" filter="url(#soft)">
             <path d="M32 24
                      C32 12, 12 12, 12 28
@@ -489,14 +514,6 @@
                      C52 12, 32 12, 32 24 Z"
                   fill="url(#heartG)"/>
             <path d="M24 22 C26 16, 34 14, 40 18" stroke="rgba(255,255,255,.55)" stroke-width="3" fill="none" stroke-linecap="round"/>
-          </g>
-
-          <g opacity="0.9">
-            <circle cx="445" cy="72" r="3" fill="#ffd66e"/>
-            <circle cx="468" cy="92" r="2.5" fill="#35d3ff"/>
-            <circle cx="418" cy="104" r="2.5" fill="#ff4d7d"/>
-            <circle cx="488" cy="122" r="3" fill="#ffffff"/>
-            <circle cx="405" cy="78" r="2.5" fill="#ffffff"/>
           </g>
         </svg>
 
@@ -517,35 +534,15 @@
         <div class="result" id="result"></div>
 
         <div class="comic" id="comic">
-          <div class="sticker">
-            <div class="icon">🎆</div>
-            <div>
-              <b>Fajerwerki</b>
-              <span>bo „Tak” to nasz mały wybuch szczęścia</span>
-            </div>
-          </div>
-          <div class="sticker">
-            <div class="icon">💗</div>
-            <div>
-              <b>Serduszka</b>
-              <span>bo Ty jesteś moim ulubionym uczuciem</span>
-            </div>
-          </div>
-          <div class="sticker">
-            <div class="icon">✨</div>
-            <div>
-              <b>Magia</b>
-              <span>bo przy Tobie wszystko jest piękniejsze</span>
-            </div>
-          </div>
+          <div class="sticker"><div class="icon">🎆</div><div><b>Fajerwerki</b><span>bo „Tak” to nasz mały wybuch szczęścia</span></div></div>
+          <div class="sticker"><div class="icon">💗</div><div><b>Serduszka</b><span>bo Ty jesteś moim ulubionym uczuciem</span></div></div>
+          <div class="sticker"><div class="icon">✨</div><div><b>Magia</b><span>bo przy Tobie wszystko jest piękniejsze</span></div></div>
         </div>
 
         <div class="panel" id="panel">
           <h2 id="qTitle">Pytanie 1/3</h2>
           <div class="q" id="qBox"></div>
-          <div class="tiny" id="tiny">
-            To nasza walentynkowa ankieta — ale odpowiedzi i tak prowadzą do jednego: „Ty”. 💞
-          </div>
+          <div class="tiny">To nasza walentynkowa ankieta — ale odpowiedzi i tak prowadzą do jednego: „Ty”. 💞</div>
         </div>
       </div>
     </div>
@@ -554,7 +551,10 @@
   <canvas class="fx" id="fx"></canvas>
 
   <script>
-    const NAME = "Sandra";
+    // Hide loader after a short "premium" intro
+    const loader = document.getElementById("loader");
+    setTimeout(()=> loader.classList.add("hide"), 900);
+
     const YOUR_WA_NUMBER = "436767888866";
 
     const NO_HINTS = [
@@ -579,9 +579,6 @@
       "Z Tobą wszystko ma sens. 💞",
       "Jesteś moją ulubioną osobą na świecie. I już. 💗"
     ];
-
-    const gfName = document.getElementById("gfName");
-    gfName.textContent = NAME;
 
     const yesBtn = document.getElementById("yesBtn");
     const noBtn  = document.getElementById("noBtn");
@@ -614,7 +611,7 @@
       noBtn.style.transform = "none";
       hint.textContent = pick(NO_HINTS);
 
-      burstAt(x + b.width/2, y + b.height/2, 22, true);
+      burstAt(x + b.width/2, y + b.height/2, 28, true);
     }
     noBtn.addEventListener("mouseenter", moveNoButton);
     noBtn.addEventListener("click", (e)=>{ e.preventDefault(); moveNoButton(); });
@@ -631,14 +628,13 @@
         el.textContent = pool[Math.floor(Math.random()*pool.length)];
         el.style.left = rnd(0, 100) + "vw";
         el.style.setProperty("--dx", rnd(-24,24) + "vw");
-        el.style.animationDuration = rnd(4.0, 7.0) + "s";
+        el.style.animationDuration = rnd(3.8, 6.8) + "s";
         hearts.appendChild(el);
         setTimeout(()=> el.remove(), 8200);
-      }, 220);
+      }, 210);
     }
 
     const answers = { like:null, nextDate:null, love:null };
-
     const steps = [
       {
         title: "Pytanie 1/3",
@@ -646,8 +642,8 @@
           <div>Sandrusiu… czy podoba Ci się ta niespodzianka? 🥺💗</div>
           <div class="row">
             <button class="btnOk" data-a="like" data-v="Tak, jest przeurocza 💖">Tak, jest przeurocza 💖</button>
-            <button class="btnPrimary" data-a="like" data-v="Tak, i zrobiło mi się cieplutko 🥰">Tak, cieplutko 🥰</button>
-            <button class="btnDark" data-a="like" data-v="Tak, ale chcę jeszcze więcej serduszek 😂💞">Więcej serduszek 😂💞</button>
+            <button class="btnPrimary" data-a="like" data-v="Tak, zrobiło mi się cieplutko 🥰">Tak, cieplutko 🥰</button>
+            <button class="btnDark" data-a="like" data-v="Tak, chcę jeszcze więcej serduszek 😂💞">Więcej serduszek 😂💞</button>
           </div>
         `
       },
@@ -686,7 +682,6 @@
           const a = btn.getAttribute("data-a");
           const v = btn.getAttribute("data-v");
           answers[a] = v;
-
           megaPop();
           if(i < steps.length - 1) showStep(i+1);
           else finishFlow();
@@ -698,7 +693,7 @@
       qTitle.textContent = "Gotowe ✅";
 
       const msg =
-        `Dla mojej Sandrusi 💖 — odpowiedzi: ` +
+        `Only for Sandra ❤️ — odpowiedzi: ` +
         `Podobało mi się: ${answers.like}; ` +
         `Następna randka: ${answers.nextDate}; ` +
         `Kocham Cię: ${answers.love}. ` +
@@ -715,8 +710,7 @@
         <div class="tiny">Jeśli WhatsApp nie otworzy się automatycznie, skopiuj wiadomość i wklej ręcznie.</div>
       `;
 
-      const waUrl = `https://wa.me/${YOUR_WA_NUMBER}?text=` + encodeURIComponent(msg);
-      document.getElementById("waBtn").href = waUrl;
+      document.getElementById("waBtn").href = `https://wa.me/${YOUR_WA_NUMBER}?text=` + encodeURIComponent(msg);
 
       document.getElementById("copyBtn").onclick = async () => {
         const btn = document.getElementById("copyBtn");
@@ -736,16 +730,14 @@
     yesBtn.addEventListener("click", ()=>{
       yesBtn.disabled = true;
       noBtn.disabled = true;
-
       result.textContent = `${pick(YES_HEADLINES)} ${pick(LOVE_LINES)}`;
       comic.style.display = "flex";
-
       startHearts();
       finaleBurst();
       showStep(0);
     });
 
-    // ====== Effects canvas ======
+    // Effects canvas
     const canvas = document.getElementById("fx");
     const ctx = canvas.getContext("2d");
     function resize(){ canvas.width = innerWidth; canvas.height = innerHeight; }
@@ -753,13 +745,9 @@
 
     let particles = [];
     let running = false;
-
     function addParticles(list){
       particles.push(...list);
-      if(!running){
-        running = true;
-        requestAnimationFrame(tick);
-      }
+      if(!running){ running = true; requestAnimationFrame(tick); }
     }
 
     function tick(){
@@ -767,18 +755,13 @@
       const gravity = 0.06;
 
       particles = particles.filter(p => p.life > 0 && p.a > 0.02);
-
       for(const p of particles){
         p.vy += (p.type === "conf" ? gravity : gravity*0.4);
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vx *= 0.995;
-        p.vy *= 0.995;
-        p.life -= 1;
-        p.a *= 0.988;
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 0.995; p.vy *= 0.995;
+        p.life -= 1; p.a *= 0.988;
 
         ctx.globalAlpha = p.a;
-
         if(p.type === "conf"){
           ctx.save();
           ctx.translate(p.x, p.y);
@@ -794,83 +777,81 @@
           ctx.fill();
         }
       }
-
       ctx.globalAlpha = 1;
-
       if(particles.length) requestAnimationFrame(tick);
       else running = false;
     }
 
     const colors = ["#ff4d7d","#35d3ff","#ffd66e","#ffffff","#35ff9a","#caa7ff"];
 
-    function confettiRain(intensity=760){
+    function confettiRain(intensity=900){
       const cx = innerWidth/2, cy = innerHeight*0.22;
       const list = [];
       for(let i=0;i<intensity;i++){
         list.push({
           type:"conf",
-          x: cx + rnd(-160,160),
-          y: cy + rnd(-90,90),
-          vx: rnd(-3.6,3.6),
-          vy: rnd(-4.2,2.2),
+          x: cx + rnd(-170,170),
+          y: cy + rnd(-95,95),
+          vx: rnd(-3.8,3.8),
+          vy: rnd(-4.4,2.4),
           s: rnd(6,12),
           rot: rnd(0, Math.PI*2),
           vr: rnd(-0.16,0.16),
           c: colors[Math.floor(rnd(0, colors.length))],
           a: 1,
-          life: Math.floor(rnd(150, 290))
+          life: Math.floor(rnd(160, 300))
         });
       }
       addParticles(list);
     }
 
-    function burstAt(x,y,count=140, soft=false){
+    function burstAt(x,y,count=210, soft=false){
       const palette = soft ? ["#ffffff","#ffd66e","#ff4d7d","#caa7ff"] : ["#ff4d7d","#35d3ff","#ffd66e","#35ff9a","#caa7ff","#ffffff"];
       const list = [];
       for(let i=0;i<count;i++){
         const ang = rnd(0, Math.PI*2);
-        const sp  = soft ? rnd(0.9,3.4) : rnd(1.8,6.8);
+        const sp  = soft ? rnd(0.9,3.6) : rnd(1.9,7.2);
         list.push({
           type:"spark",
           x, y,
           vx: Math.cos(ang)*sp,
-          vy: Math.sin(ang)*sp - (soft ? 0.2 : 1.1),
-          s: rnd(1.6, 4.1),
+          vy: Math.sin(ang)*sp - (soft ? 0.2 : 1.15),
+          s: rnd(1.6, 4.2),
           c: palette[Math.floor(rnd(0, palette.length))],
           a: 1,
-          life: Math.floor(rnd(80, 155))
+          life: Math.floor(rnd(80, 160))
         });
       }
       addParticles(list);
     }
 
     function finaleBurst(){
-      confettiRain(820);
-      for(let i=0;i<16;i++){
+      confettiRain(980);
+      for(let i=0;i<18;i++){
         setTimeout(()=>{
-          burstAt(rnd(innerWidth*0.12, innerWidth*0.88), rnd(innerHeight*0.08, innerHeight*0.66), 170, false);
-        }, i*95);
+          burstAt(rnd(innerWidth*0.10, innerWidth*0.90), rnd(innerHeight*0.08, innerHeight*0.70), 240, false);
+        }, i*85);
       }
     }
 
     function megaPop(){
-      confettiRain(320);
-      burstAt(rnd(innerWidth*0.25, innerWidth*0.75), rnd(innerHeight*0.16, innerHeight*0.68), 120, true);
+      confettiRain(360);
+      burstAt(rnd(innerWidth*0.25, innerWidth*0.75), rnd(innerHeight*0.16, innerHeight*0.70), 160, true);
     }
 
     function finaleShow(){
-      confettiRain(980);
-      for(let i=0;i<20;i++){
+      confettiRain(1150);
+      for(let i=0;i<22;i++){
         setTimeout(()=>{
-          burstAt(rnd(innerWidth*0.10, innerWidth*0.90), rnd(innerHeight*0.08, innerHeight*0.72), 200, false);
-        }, i*85);
+          burstAt(rnd(innerWidth*0.08, innerWidth*0.92), rnd(innerHeight*0.06, innerHeight*0.76), 260, false);
+        }, i*78);
       }
     }
 
     document.addEventListener("click", (e)=>{
       const t = e.target;
       if(t && (t.tagName === "BUTTON" || t.tagName === "A")) return;
-      burstAt(e.clientX, e.clientY, 46, true);
+      burstAt(e.clientX, e.clientY, 60, true);
     });
   </script>
 </body>
