@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Walentynki</title>
+  <meta name="description" content="Sandra, zostaniesz moją walentynką?" />
+  <style>
+    :root { --pink:#ff4d7d; --bg1:#ffe5ef; --bg2:#ffd6e6; --card:#ffffffcc; }
+    * { box-sizing:border-box; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; }
+    body{
+      margin:0; min-height:100vh; display:grid; place-items:center;
+      background: radial-gradient(1200px 800px at 20% 20%, var(--bg1), var(--bg2));
+      padding:24px;
+    }
+    .card{
+      width:min(560px, 92vw);
+      background: var(--card);
+      border: 1px solid #ffffff80;
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
+      padding: 28px 22px 22px;
+      text-align:center;
+      box-shadow: 0 14px 40px rgba(0,0,0,.12);
+      position: relative;
+    }
+    .badge{
+      width:86px; height:86px; margin:0 auto 10px;
+      display:grid; place-items:center;
+      border-radius: 50%;
+      background: #ffd1df;
+      position: relative;
+      font-size:34px;
+    }
+    .badge::after{
+      content:"❤";
+      position:absolute; right:-6px; top:-10px;
+      font-size:22px;
+      transform: rotate(12deg);
+    }
+    h1{
+      margin: 10px 0 8px;
+      font-size: 26px;
+      line-height: 1.2;
+      color:#151515;
+      letter-spacing:-.2px;
+    }
+    .sub{
+      margin:0 0 14px;
+      font-size: 14px;
+      color:#333;
+      opacity:.85;
+    }
+    .name{ font-weight:800; }
+    .actions{
+      margin-top: 8px;
+      height: 150px;
+      position: relative;
+    }
+    button, a.btn{
+      border:0;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .12s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    button:active, a.btn:active{ transform: scale(.98); }
+
+    #yesBtn{
+      background: var(--pink);
+      color:white;
+      box-shadow: 0 10px 24px rgba(255,77,125,.25);
+      position:absolute;
+      left: 50%;
+      transform: translateX(-115%);
+      top: 46px;
+      min-width: 120px;
+    }
+
+    #noBtn{
+      background: #e9e9ee;
+      color:#222;
+      position:absolute;
+      left: 50%;
+      transform: translateX(15%);
+      top: 46px;
+      min-width: 120px;
+    }
+
+    .hint{
+      position:absolute;
+      left:0; right:0;
+      bottom: 0px;
+      font-size: 12px;
+      color:#444;
+      opacity:.8;
+      padding:0 10px;
+    }
+
+    .result{
+      margin-top: 14px;
+      font-size: 15px;
+      color:#222;
+      min-height: 22px;
+    }
+
+    .dateBox{
+      margin-top: 14px;
+      display:none;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .chip{
+      border:1px solid #0000001a;
+      background:#fff;
+      padding:10px 12px;
+      border-radius:14px;
+      min-width: min(420px, 92vw);
+      text-align:left;
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+    }
+    .chip b{ display:block; margin-bottom:6px; }
+
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .btnDark{
+      background:#111;
+      color:#fff;
+    }
+    .btnLight{
+      background:#fff;
+      color:#111;
+      border:1px solid #0000001a;
+    }
+
+    .confetti{
+      position: fixed; inset: 0;
+      pointer-events:none;
+    }
+
+    @media (max-width: 380px){
+      h1{ font-size: 23px; }
+      .actions{ height: 160px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="badge" aria-hidden="true">🐻</div>
+
+    <h1><span class="name" id="gfName">Sandra</span>, zostaniesz moją walentynką?</h1>
+    <p class="sub">Uwaga: „Nie” dzisiaj jest wyjątkowo płochliwe 😈</p>
+
+    <div class="actions" id="arena" aria-label="Wybór">
+      <button id="yesBtn">Tak</button>
+      <button id="noBtn" aria-label="Nie">Nie</button>
+      <div class="hint" id="hint">Spróbuj kliknąć „Nie”… jeśli się odważysz 😉</div>
+    </div>
+
+    <div class="result" id="result"></div>
+
+    <div class="dateBox" id="dateBox">
+      <div class="chip">
+        <b>Kiedy randka? 💘</b>
+        <div id="dateText">Piątek czy sobota? A może Ty wybierasz — ja się dostosuję 😄</div>
+      </div>
+
+      <div class="ctaRow">
+        <button class="btnDark" id="copyBtn">Skopiuj wiadomość</button>
+        <a class="btn btnLight" id="waLink" href="#" target="_blank" rel="noopener">Wyślij na WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <canvas class="confetti" id="confetti"></canvas>
+
+  <script>
+    const NAME = "Sandra";
+
+    const NO_HINTS = [
+      "„Nie” ucieka szybciej, niż myślisz 😇",
+      "„Nie” dzisiaj nie współpracuje 😈",
+      "Oho… „Nie” zniknęło 🙃",
+      "„Nie” właśnie poszło na urlop 🏝️",
+      "Nie ma opcji. Spróbuj jeszcze raz 😄"
+    ];
+
+    const YES_TEXTS = [
+      "Taaak! 💖",
+      "Okej… to oficjalne 🥰",
+      "No to pięknie 💘"
+    ];
+
+    const gfName = document.getElementById("gfName");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn  = document.getElementById("noBtn");
+    const arena  = document.getElementById("arena");
+    const hint   = document.getElementById("hint");
+    const result = document.getElementById("result");
+
+    const dateBox = document.getElementById("dateBox");
+    const copyBtn = document.getElementById("copyBtn");
+    const waLink  = document.getElementById("waLink");
+
+    gfName.textContent = NAME;
+
+    function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+
+    function moveNoButton() {
+      const a = arena.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+
+      const padding = 8;
+      const maxX = Math.max(padding, a.width  - b.width  - padding);
+      const maxY = Math.max(padding, a.height - b.height - padding);
+
+      // Zufällig, aber sicher innerhalb der Arena
+      const x = clamp(padding + Math.random() * (maxX - padding), padding, maxX);
+      const y = clamp(padding + Math.random() * (maxY - padding), padding, maxY);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top  = y + "px";
+      noBtn.style.transform = "none";
+
+      hint.textContent = NO_HINTS[Math.floor(Math.random() * NO_HINTS.length)];
+    }
+
+    // Desktop + Mobile
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("click", (e) => { e.preventDefault(); moveNoButton(); });
+    noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoButton(); }, { passive:false });
+
+    setTimeout(moveNoButton, 250);
+
+    yesBtn.addEventListener("click", () => {
+      const headline = YES_TEXTS[Math.floor(Math.random() * YES_TEXTS.length)];
+      result.textContent = `${headline} To teraz… kiedy randka? 😄`;
+
+      fireConfetti();
+      yesBtn.disabled = true;
+      noBtn.disabled = true;
+      hint.textContent = "💞";
+
+      dateBox.style.display = "grid";
+
+      const msg = `${NAME} ❤️ Powiedziałaś TAK! 😄 To kiedy randka?`;
+      waLink.href = "https://wa.me/?text=" + encodeURIComponent(msg);
+
+      copyBtn.onclick = async () => {
+        try{
+          await navigator.clipboard.writeText(msg);
+          copyBtn.textContent = "Skopiowane ✅";
+          setTimeout(()=>copyBtn.textContent="Skopiuj wiadomość", 1400);
+        }catch{
+          copyBtn.textContent = "Nie mogę skopiować 😅";
+          setTimeout(()=>copyBtn.textContent="Skopiuj wiadomość", 1400);
+        }
+      };
+    });
+
+    // Konfetti
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+    addEventListener("resize", resize); resize();
+
+    let particles = [];
+    function fireConfetti(){
+      const count = 170;
+      const cx = innerWidth/2, cy = innerHeight/2;
+      particles = [];
+      for(let i=0;i<count;i++){
+        particles.push({
+          x: cx, y: cy,
+          vx: (Math.random()-0.5)*10,
+          vy: (Math.random()-0.8)*12,
+          g: 0.22 + Math.random()*0.08,
+          r: 3 + Math.random()*4,
+          a: 1
+        });
+      }
+      requestAnimationFrame(tick);
+      setTimeout(()=>particles = [], 1800);
+    }
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(const p of particles){
+        p.vy += p.g;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.a *= 0.985;
+
+        ctx.globalAlpha = p.a;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      if(particles.length) requestAnimationFrame(tick);
+    }
+  </script>
+</body>
+</html>
